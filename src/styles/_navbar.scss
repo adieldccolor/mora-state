@@ -1,0 +1,61 @@
+
+.navigation-wrapper{
+	position: relative;
+}
+
+.navigation{
+	height: 100px;
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	.container,
+	.container-fluid{
+		padding-top: 36px;
+	}
+
+	.logotype{
+		margin-left: 10px;
+		font-size: 28px;
+		line-height: 28px;
+		vertical-align: middle;
+		color: #000;
+
+		&,
+		&:hover,
+		&:focus{
+			text-decoration: none;
+		}
+	}
+
+	.burger{
+		margin-right: 10px;
+		font-size: 28px;
+		line-height: 28px;
+		vertical-align: middle;
+		color: #000;
+
+		&,
+		&:hover,
+		&:focus{
+			text-decoration: none;
+		}
+	}
+
+	&.inverse{
+		.logotype,
+		.burger{
+			@include brand-color(light1);
+		}
+	}
+
+}
+
+.navigation-spacer{
+	height: 100px;
+	&.is-over-banner{
+		position: absolute;
+	}
+}

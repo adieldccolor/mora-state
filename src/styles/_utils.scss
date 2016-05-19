@@ -1,0 +1,106 @@
+body {
+	//Set Base color for everything as default
+	@include brand-color(dark1);
+	@include brand-color-bg(light1);
+}
+
+.content-wrapper{
+	// margin: 30px;
+}
+
+.white-space{
+	margin: 20px 0;
+
+	&.nomargin{
+		margin: 0px;
+	}
+
+	&.withpadding{
+		padding: 20px 0;
+	}
+}
+
+h2,
+.h2 {
+  @include CalibreMedium;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.text-roman{
+  @include NewBaskervilleStdRoman;
+  font-size: 20px;
+  line-height: 2;
+}
+
+.btn{
+  &.btn-brand{
+    @include NewBaskervilleStdSemiBoldItalic;
+    font-size: 20px;
+    line-height: 20px;
+
+    padding: 20px 40px;
+    border: 1px solid #fff;
+    @include brand-color(light1);
+    border-radius: 0px;
+
+    &,
+    &:hover,
+    &:focus{
+      text-decoration: none;
+    }
+  }
+}
+
+//bg-color-$color classes from brand colors (_config.scss)
+@each $name, $color in $colors {
+  .bg-color-#{$name} {
+    background-color: #{$color};
+  }
+
+  .text-color-#{$name} {
+    color: #{$color};
+  }
+}
+
+//Base styles
+
+
+//Clearfix
+.clearfix{
+	display: block;
+	clear: both;
+}
+
+//text-align
+.text-left{
+	text-align: left;
+}
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'mora-state' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@each $name, $icon in $icons {
+  .icon-#{$name}:before {
+    content: $icon;
+  }
+}

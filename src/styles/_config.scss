@@ -1,0 +1,29 @@
+/* *** === COLORS === *** */
+
+$colors: (
+		'base': '#D95C36',
+		'dark1': '#262626',
+		'dark2': '#414042',
+		'dark3': '#231F20',
+		'light1': '#EAE8E4',
+		'light2': '#58595B',
+		'white': '#fff'
+  );
+
+$breakpoints: (
+  x-small: 'screen and (max-width: 480px)',
+  small: 'screen and (max-width: 767px)',
+  medium: 'screen and (max-width: 992px)',
+  large: 'screen and (max-width: 1200px)',
+  x-large: 'screen and (max-width: 1400px)',
+  print: 'print'
+);
+
+$icons: (
+	mora: "\e900",
+	signature: "\e901",
+	times: "\e902",
+	hamburger: "\e905",
+	logotype: "\e907",
+	logotype-small: "\e908"
+);

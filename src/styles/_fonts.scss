@@ -1,0 +1,80 @@
+
+/* *** ====================== *** */
+/* *** ==== List of Fonts === *** */
+
+@font-face {
+	font-family: 'Calibre Medium';
+	src: url('../fonts/Calibre Medium.eot');
+	src: local('☺'), url('../fonts/Calibre Medium.woff') format('woff'), url('../fonts/Calibre Medium.ttf') format('truetype'), url('../fonts/Calibre Medium.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibre Regular';
+	src: url('../fonts/Calibre Regular.eot');
+	src: local('☺'), url('../fonts/Calibre Regular.woff') format('woff'), url('../fonts/Calibre Regular.ttf') format('truetype'), url('../fonts/Calibre Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'MyriadPro-Regular';
+	src: url('../fonts/MyriadPro-Regular.eot');
+	src: local('☺'), url('../fonts/MyriadPro-Regular.woff') format('woff'), url('../fonts/MyriadPro-Regular.ttf') format('truetype'), url('../fonts/MyriadPro-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NewBaskervilleStd Italic';
+	src: url('../fonts/NewBaskervilleStd Italic.eot');
+	src: local('☺'), url('../fonts/NewBaskervilleStd Italic.woff') format('woff'), url('../fonts/NewBaskervilleStd Italic.ttf') format('truetype'), url('../fonts/NewBaskervilleStd Italic.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NewBaskervilleStd Roman';
+	src: url('../fonts/NewBaskervilleStd Roman.eot');
+	src: local('☺'), url('../fonts/NewBaskervilleStd Roman.woff') format('woff'), url('../fonts/NewBaskervilleStd Roman.ttf') format('truetype'), url('../fonts/NewBaskervilleStd Roman.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NewBaskervilleStd SemiBold';
+	src: url('../fonts/NewBaskervilleStd SemiBold.eot');
+	src: local('☺'), url('../fonts/NewBaskervilleStd SemiBold.woff') format('woff'), url('../fonts/NewBaskervilleStd SemiBold.ttf') format('truetype'), url('../fonts/NewBaskervilleStd SemiBold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NewBaskervilleStd SemiBoldItalic';
+	src: url('../fonts/NewBaskervilleStd SemiBoldItalic.eot');
+	src: local('☺'), url('../fonts/NewBaskervilleStd SemiBoldItalic.woff') format('woff'), url('../fonts/NewBaskervilleStd SemiBoldItalic.ttf') format('truetype'), url('../fonts/NewBaskervilleStd SemiBoldItalic.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SUWoodwardScript';
+	src: url('../fonts/SUWoodwardScript.eot');
+	src: local('☺'), url('../fonts/SUWoodwardScript.woff') format('woff'), url('../fonts/SUWoodwardScript.ttf') format('truetype'), url('../fonts/SUWoodwardScript.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+$icomoon-font-path: '../fonts';
+
+@font-face {
+    font-family: 'mora-state';
+    src:    url('#{$icomoon-font-path}/mora-state.eot?75ncat');
+    src:    url('#{$icomoon-font-path}/mora-state.eot?75ncat#iefix') format('embedded-opentype'),
+        url('#{$icomoon-font-path}/mora-state.ttf?75ncat') format('truetype'),
+        url('#{$icomoon-font-path}/mora-state.woff?75ncat') format('woff'),
+        url('#{$icomoon-font-path}/mora-state.svg?75ncat#mora-state') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

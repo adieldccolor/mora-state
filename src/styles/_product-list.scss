@@ -1,0 +1,91 @@
+.product-list-invitation{
+	font-size: 0;
+
+	ul {
+		list-style: none;
+		text-align: center;
+		padding: 0;
+		margin: 0;
+
+		li{
+			position: relative;
+			display: inline-block;
+			width: 33.33%;
+			margin-bottom: 50px;
+
+			@include respond-to(medium) {
+				width: 50%;
+			}
+
+			@include respond-to(x-small) {
+				width: 100%;
+			}
+
+			.product-anchor{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 10;
+			}
+
+			.product-image{
+				padding: 0 15px 90px;
+
+				@include respond-to(x-large) {
+					padding-bottom: 40px;
+				}
+
+				@include respond-to(small) {
+					padding-bottom: 20px;
+				}
+
+				img{
+					max-width: 100%;
+
+					@include respond-to(x-large) {
+						max-height: 300px;
+					}
+
+					@include respond-to(small) {
+						max-height: 200px;
+					}
+
+				}
+			}
+
+			.product-information{
+				padding: 0 15px 10px;
+
+				.product-name{
+					@include CalibreMedium;
+					font-size: 28px;
+					@include brand-color(light1);
+				}
+
+				.product-year{
+					@include CalibreRegular;
+					font-size: 26px;
+					@include brand-color(light2);
+				}
+			}
+		}
+	} // ends .ul
+
+	.cta-wrapper{
+		text-align: center;
+		margin-top: 100px;
+		padding-bottom: 60px;
+
+		@include respond-to(x-large) {
+			margin-top: 50px;
+			padding-bottom: 20px;
+		}
+
+		@include respond-to(large) {
+			margin-top: 0px;
+		}
+	}
+
+}
