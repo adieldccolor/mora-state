@@ -1,0 +1,29 @@
+
+.video-fullscreen{
+	
+	.js-loader{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 60px;
+		height: 60px;
+		background: #000 url(../images/loader.gif) center center no-repeat;
+		border-radius: 15px;
+		opacity: 0.5;
+	}
+	
+	.js-close-video{
+		color: #fff;
+		font-size: 30px;
+		position: fixed;
+		top: 10px;
+		right: 10px;
+		z-index: 5;
+
+		&,
+		&:hover,
+		&:focus{
+			text-decoration: none;
+		}
+	}
+}

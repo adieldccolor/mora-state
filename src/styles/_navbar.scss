@@ -23,6 +23,10 @@
 		vertical-align: middle;
 		color: #000;
 
+		@include respond-to(x-small) {
+			font-size: 20px;
+		}
+
 		&,
 		&:hover,
 		&:focus{
@@ -36,6 +40,10 @@
 		line-height: 28px;
 		vertical-align: middle;
 		color: #000;
+
+		@include respond-to(x-small) {
+			font-size: 20px;
+		}
 
 		&,
 		&:hover,

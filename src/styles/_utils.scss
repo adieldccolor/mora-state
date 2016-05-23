@@ -6,6 +6,12 @@ body {
 
 .content-wrapper{
 	// margin: 30px;
+  border: 30px solid #{map-get($colors, light1)};
+  position: relative;
+
+  &.nopadding-top{
+    border-top-width: 0px;
+  }
 }
 
 .white-space{
@@ -48,6 +54,56 @@ h2,
     &:hover,
     &:focus{
       text-decoration: none;
+      box-shadow: none;
+    }
+  }
+
+
+  &.btn-brand-bold{
+    @include NewBaskervilleStdSemiBoldItalic;
+    font-size: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+
+    padding: 20px 40px;
+    border: 1px solid #000;
+    color: #000;
+    border-radius: 0px;
+
+    position: relative;
+
+    transition: color 0.3s;
+    z-index: 1;
+
+    &:before{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background-color: #000;
+      transition: all 0.3s;
+      z-index: -1;
+    }
+
+    &,
+    &:hover,
+    &:focus{
+      text-decoration: none;
+      box-shadow: none;
+    }
+
+    &:hover,
+    &:focus{
+      color: #fff;
+
+      &:before{
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+      }
     }
   }
 }
@@ -55,11 +111,11 @@ h2,
 //bg-color-$color classes from brand colors (_config.scss)
 @each $name, $color in $colors {
   .bg-color-#{$name} {
-    background-color: #{$color};
+    background-color: #{$color} !important;
   }
 
   .text-color-#{$name} {
-    color: #{$color};
+    color: #{$color} !important;
   }
 }
 

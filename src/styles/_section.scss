@@ -3,11 +3,30 @@
 	min-height: 400px;
 	min-height: 100vh;
 	background-color: #000;
+	background-repeat: no-repeat;
 	background-position: 50% 0%;
 	background-image: url(../images/scratched-texture.png);
 	-webkit-background-size: cover;
 	background-size: cover;
 	position: relative;
+
+	@include minHeightPollyfill;
+
+	&.is-banner{
+		min-height: 600px;
+
+		@include respond-to(x-large) {
+			min-height: 500px;
+		}
+
+		@include respond-to(medium) {
+			min-height: 400px;
+		}
+
+		@include respond-to(small) {
+			min-height: 300px;
+		}
+	}
 
 
 	.overlay{
@@ -23,6 +42,11 @@
 		&.is-watermark{
 			opacity: 0.4;
 			background: #000 url(../images/watermark.svg) center center no-repeat;
+
+			@include respond-to(small) {
+				-webkit-background-size: 80%;
+				background-size: 80%;
+			}
 		}
 	}
 
@@ -36,6 +60,10 @@
 		}
 	}
 
+	&.no-bg-image{
+		background: none;
+	}
+
 	.section-wrapper{
 		position: relative;
 		z-index: 5;
@@ -45,9 +73,34 @@
 	  align-items: center;
 	  justify-content: center;
 
+	  @include minHeightPollyfill;
+
+	  .container{
+	  	&.is-flex{
+	  		display: flex;
+			  align-items: center;
+			  justify-content: center;
+	  	}
+	  }
+
+	  .js-play{
+	  	font-size: 125px;
+	  	color: #fff;
+
+	  	&,
+	  	&:hover,
+	  	&:focus{
+	  		text-decoration: none;
+	  	}
+	  }
+
 	  .section-title{
 	  	text-align: right;
 	  	align-self: flex-start;
+
+	  	&.text-left{
+	  		text-align: left;
+	  	}
 
 	  	h3{
 	  		@include SUWoodwardScript;
@@ -55,38 +108,217 @@
 	  		@include brand-color(dark2);
 	  		transform: rotate(-5deg) translateY(10px);
 	  		margin-top: 50px;
+	  		line-height: 40px;
+	  		display: inline-block;
 	  	}
 	  }
 
 		.section-content{
 			text-align: center;
 			color: #fff;
-			padding: 120px 0 80px;
+			padding: 120px 0 100px;
 
 			@include respond-to(medium) {
-				padding: 80px 0 60px;
+				padding: 80px 0 80px;
 			}
 
-			@include respond-to(small) {
-				padding: 50px 0 50px;
+			@include respond-to(double-pixel) {
+				padding: 100px 0;
 			}
 
-			@include respond-to(x-small) {
-				padding: 40px 0;
+			.text-title{
+				h2{
+					@include CalibreMedium;
+					font-size: 37px;
+					line-height: 45px;
+					letter-spacing: 4px;
+					text-transform: uppercase;
+
+					max-width: 500px;
+					margin: 0 auto 150px;
+
+					 @include respond-to(medium) {
+					  	max-width: 100%;
+					  }
+				}
+
+				h3{
+					@include CalibreMedium;
+					font-size: 28px;
+					letter-spacing: 4px;
+					text-transform: uppercase;
+					margin-bottom: 50px;
+				}
 			}
 
 			.text-content{
-				@include NewBaskervilleStdRoman;
-			  font-size: 20px;
-			  line-height: 2;
+				&,
+				p{
+					@include NewBaskervilleStdRoman;
+				  font-size: 20px;
+				  line-height: 2;
+				  letter-spacing: 2px;
 
-			  max-width: 500px;
-			  margin: 0 auto;
+				  max-width: 500px;
+				  margin: 0 auto;
+				}
+
+				&.extended-width{
+					&,
+					p{
+						max-width: 700px;
+					}
+				}
+
+				p {
+					margin-bottom: 60px;
+				}
 
 			  @include respond-to(medium) {
-			  	max-width: 100%;
+			  	&,
+			  	&.extended-width{
+			  		&,
+			  		p{
+			  			max-width: 100%;
+			  		}
+			  	}
 			  } 
+
+			  &.box-right,
+				&.box-left,
+				&.box-center{
+					font-size: 18px;
+				}
+
+				
+				&.box-right,
+				&.box-left{
+					width: 50%;
+					margin: 0 0 50px auto;
+					text-align: left;
+
+					@include respond-to(medium) {
+						width: 100%;
+					}
+				}
+
+				&.box-left{
+					margin-left: 0;
+					color: #000;
+				}
+
+
 			}
 		}
 	}
+}
+
+
+
+
+
+/* ****** FALLBACK FOR NO-FLEXBOX SUPPORT ******* */
+.no-flexbox{
+	.vertical-section{
+		&,
+		.section-wrapper{
+			width: 100%;
+		}
+
+		&,
+		.section-wrapper,
+		.section-wrapper .container{
+			display: table;
+			clear: both;
+		}
+
+		.section-content{
+			display: table-cell;
+			width: 100%;
+			vertical-align: middle;
+
+			@include respond-to(medium) {
+				padding: 50px 0;
+			}
+		}
+
+		.section-title{
+			display: table-row;
+			width: 100%;
+			vertical-align: top;
+		}
+
+		&.is-under-menu{
+			.section-content{
+				padding: 120px 80px;
+			}
+		}
+	}
+}
+/* ****** FALLBACK FOR NO-FLEXBOX SUPPORT ******* */
+
+
+.textured-corner{
+	position: absolute;
+	width: 100%;
+	height: 300px;
+	left: 0;
+	margin-top: -290px;
+	background: transparent url(../images/white-texture1.png) center top no-repeat;
+
+	&.is-texture-2{
+		background-image: url(../images/white-texture2.png);
+		height: 283px;
+		margin-top: -280px;
+	}
+}
+
+
+.page-content{
+	background-color: #fff;
+	padding: 0px 0 100px;
+	color: #000;
+
+	&.is-transparent{
+		background-color: transparent;
+	}
+
+	.page-title{
+		text-align: right;
+
+		&.text-left {
+			text-align: left;
+		}
+
+		h3{
+			@include SUWoodwardScript;
+  		font-size: 138px;
+  		transform: rotate(-5deg) translateY(10px);
+  		line-height: 40px;
+  		display: inline-block;
+  		margin-top: 0px;
+		}
+
+	}
+
+	&.has-texture-corner{
+		.page-title{
+			margin-top: -100px;
+		}
+	}
+
+	.page-body{
+		padding-top: 80px;
+
+		@include respond-to(medium) {
+			padding-top: 60px;
+		}
+
+		@include respond-to(small) {
+			padding-top: 40px;
+		}
+
+		@include borderedTable;
+	}
+
 }

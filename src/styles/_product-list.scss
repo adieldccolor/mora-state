@@ -89,3 +89,114 @@
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.product-list{
+	font-size: 0;
+	padding-top: 100px;
+
+	@include respond-to(medium) {
+		padding-top: 75px;
+	}
+
+	@include respond-to(small) {
+		padding-top: 50px;
+	}
+
+	ul {
+		list-style: none;
+		text-align: center;
+		padding: 0;
+		margin: 0;
+
+		li{
+			position: relative;
+			display: inline-block;
+			width: 25%;
+			margin-bottom: 150px;
+
+			@include respond-to(large) {
+				width: 33.33%;
+			}
+
+			@include respond-to(medium) {
+				width: 50%;
+				margin-bottom: 100px;
+			}
+
+			@include respond-to(small) {
+				margin-bottom: 50px;
+			}
+
+			@include respond-to(x-small) {
+				width: 100%;
+			}
+
+			.product-anchor{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 10;
+			}
+
+			.product-image{
+				padding: 0 15px 90px;
+
+				@include respond-to(x-large) {
+					padding-bottom: 40px;
+				}
+
+				@include respond-to(small) {
+					padding-bottom: 20px;
+				}
+
+				img{
+					max-width: 100%;
+
+					@include respond-to(x-large) {
+						max-height: 300px;
+					}
+
+					@include respond-to(small) {
+						max-height: 200px;
+					}
+
+				}
+			}
+
+			.product-information{
+				padding: 0 15px 10px;
+
+				.product-name{
+					@include NewBaskervilleStdSemiBold;
+					font-size: 28px;
+					color: #000;
+				}
+
+				.product-year{
+					@include CalibreRegular;
+					font-size: 18px;
+					@include brand-color(light2);
+				}
+
+				.product-cta{
+					padding-top: 25px;
+				}
+			}
+		}
+	} // ends .ul
+
+
+}

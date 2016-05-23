@@ -21,6 +21,7 @@
     "modernizer": "^2.8.2",
     "jquery.stellar": "stellar#^0.6.2",
     "PreloadJS": "createjs/preloadjs#^0.6.2",
-    "TweenMax": "https://raw.githubusercontent.com/greensock/GreenSock-JS/master/src/uncompressed/TweenMax.js"
+    "TweenMax": "https://raw.githubusercontent.com/greensock/GreenSock-JS/master/src/uncompressed/TweenMax.js",
+    "BigVideo": "BigVideo.js#^1.1.5"
   }
 }

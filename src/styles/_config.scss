@@ -7,7 +7,8 @@ $colors: (
 		'dark3': '#231F20',
 		'light1': '#EAE8E4',
 		'light2': '#58595B',
-		'white': '#fff'
+		'white': '#fff',
+		'black': '#000'
   );
 
 $breakpoints: (
@@ -16,6 +17,10 @@ $breakpoints: (
   medium: 'screen and (max-width: 992px)',
   large: 'screen and (max-width: 1200px)',
   x-large: 'screen and (max-width: 1400px)',
+  double-pixel: 'only screen and (-webkit-min-device-pixel-ratio: 2), only screen 
+	  and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), 
+	  only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), 
+	  only screen and (min-resolution: 2dppx)',
   print: 'print'
 );
 
@@ -23,6 +28,7 @@ $icons: (
 	mora: "\e900",
 	signature: "\e901",
 	times: "\e902",
+	play: "\e903",
 	hamburger: "\e905",
 	logotype: "\e907",
 	logotype-small: "\e908"

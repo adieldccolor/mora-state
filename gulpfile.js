@@ -1,11 +1,16 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var concatCss = require('gulp-concat-css');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
 var copy = require('gulp-copy');
 var mainBowerFiles = require('main-bower-files');
 var filter = require('gulp-filter');
+var babel = require('gulp-babel');
+var gulpIf = require('gulp-if');
+var uglify = require('gulp-uglifyjs');
+var cleanCSS = require('gulp-clean-css');
+var sourcemaps = require('gulp-sourcemaps');
+
+var isProduction = false;
 
 gulp.task('dist-bower-css', function() {
 	console.log("Bundling bower_components stylesheets");
@@ -13,11 +18,17 @@ gulp.task('dist-bower-css', function() {
         "overrides": {
           "bootstrap": {
                "main": "dist/css/bootstrap.css"
+          },
+          "BigVideo": {
+               "main": "css/bigvideo.css"
           }
         }
       }))
       .pipe(filter('**/*.css'))
-      .pipe(concatCss('vendor.css'))
+      .pipe(gulpIf(!isProduction, sourcemaps.init()))
+      .pipe(concat('vendor.css'))
+      .pipe(gulpIf(isProduction, cleanCSS()))
+      .pipe(gulpIf(!isProduction, sourcemaps.write()))
       .pipe(gulp.dest('assets/css'));;
 });
 
@@ -34,7 +45,10 @@ gulp.task('dist-bower-js', function() {
         }
       }))
       .pipe(filter('**/*.js'))
+      .pipe(gulpIf(!isProduction, sourcemaps.init()))
       .pipe(concat('vendor.js', {sourcesContent: true}))
+      .pipe(gulpIf(isProduction, uglify()))
+      .pipe(gulpIf(!isProduction, sourcemaps.write()))
       .pipe(gulp.dest('assets/js'));
 });
 
@@ -42,22 +56,37 @@ gulp.task('dist-bower-js', function() {
 gulp.task('dist-app-styles', function () {
 	console.log("Bundling app stylesheets");
   gulp.src('./src/styles/main.scss')
+    .pipe(gulpIf(!isProduction, sourcemaps.init()))
     .pipe(sass().on('error', sass.logError))
+    .pipe(gulpIf(isProduction, cleanCSS()))
+    .pipe(gulpIf(!isProduction, sourcemaps.write()))
     .pipe(gulp.dest('assets/css'));
 });
 
 gulp.task('dist-app-js', function() {
 	console.log("Bundling app scripts");
   return gulp.src('src/scripts/*.js')
-  	.pipe(concat('main.js', {sourcesContent: true}))
-    // .pipe(uglify())
+    .pipe(gulpIf(!isProduction, sourcemaps.init()))
+    .pipe(concat('main.js', {sourcesContent: true}))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulpIf(isProduction, uglify()))
+    .pipe(gulpIf(!isProduction, sourcemaps.write()))
     .pipe(gulp.dest('assets/js'));
 });
 
 gulp.task('dist-copy-fonts', function() {
-	console.log("Copying fonts");
+  console.log("Copying fonts");
   return gulp.src('src/fonts/*')
-  	.pipe(copy('assets/', { prefix: 1 }));
+    .pipe(copy('assets/', { prefix: 1 }));
+});
+
+gulp.task('dist-set-production', function() {
+	console.log("Bundling for Production");
+  isProduction = true;
+  return isProduction;
 });
 
 gulp.task('default', ['dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
+gulp.task('production', ['dist-set-production', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
