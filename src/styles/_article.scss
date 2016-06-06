@@ -1,0 +1,80 @@
+
+
+.article-heading{
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+
+	h1{
+		margin: 0;
+		padding: 0;
+
+		@include NewBaskervilleStdRoman;
+		font-size: 80px;
+	}
+
+	.article-date{
+		text-transform: uppercase;
+		@include CalibreRegular;
+		font-size: 18px;
+	}
+
+	.article-author{
+		&, a{
+			@include NewBaskervilleStdItalic;
+			font-size: 18px;
+
+			&,
+			&:hover,
+			&:focus{
+				color: #fff;
+			}
+		}
+	}
+}
+
+
+
+
+.article-meta{
+	background-color: #fff;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+
+	.row{
+		margin: 0;
+	}
+
+	[class*="col-"] {
+		position: relative;
+		padding: 0;
+
+		a {
+			@include CalibreMedium;
+			font-size: 16px;
+			display: block;
+			text-align: center;
+			color: #000;
+			text-transform: uppercase;
+			border-top: 1px solid #000;
+			border-left: 1px solid #000;
+
+			padding: 65px 0px;
+			@include respond-to(x-large) {
+				padding: 40px 0;
+			}
+			@include respond-to(x-large) {
+				padding: 30px 0;
+			}
+			@include respond-to(medium) {
+				padding: 25px 0;
+			}
+			@include respond-to(small) {
+				padding: 20px 0;
+			}
+
+			&:hover,
+			&:focus{
+				@include brand-color-bg(light1);
+			}
+		}
+	}
+}

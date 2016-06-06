@@ -16,7 +16,9 @@
 		<div class="overlay"></div>
 		<div class="preload-content">
 			<div class="container text-center">
-				<i class="icon-logotype-small"></i>
+				<span>
+					<img src="assets/images/small-loader.gif" alt=""> <i class="icon-logotype-small"></i>
+				</span>
 			</div>
 			<div class="preload-progress"></div>
 		</div>
@@ -25,7 +27,6 @@
 
 	<!-- OVERLAY MENU -->
 	<div class="overlay-menu">
-		<div class="overlay"></div>
 		<div class="menu-wrapper">
 			<div class="container">
 				<div class="menu-box">
@@ -68,7 +69,7 @@
 
 			<!-- HEADER MENU INVERSE COLORS -->
 			<div class="navigation-wrapper">
-				<div class="navigation">
+				<div class="navigation invserse">
 					<div class="container-fluid">
 						<a href="./" class="logotype"><i class="icon-logotype"></i></a>
 
@@ -78,29 +79,69 @@
 						</div>
 					</div>
 				</div>
-				<div class="navigation-spacer"></div>
+				<div class="navigation-spacer is-over-banner"></div>
 			</div> <!-- /.navigation-wrapper -->
 
-			<section class="vertical-section js-has-image is-banner" style="background-image: url('assets/images/field.jpg'); background-position: bottom center;">
+			<section class="vertical-section js-has-image is-banner is-under-menu" style="background-image: url('assets/images/field.jpg'); background-position: bottom center;">
 			</section>
 
 
 
-			<section class="page-content has-texture-corner is-transparent">
+			<section class="page-content has-texture-corner is-transparent generic-page">
 				<div class="textured-corner is-texture-2"></div>
 
 				<div class="container">
-					<div class="page-title text-left">
-						<h3>contact</h3>
-					</div>
 
-					<div class="page-body">
+					<div class="page-body contact-body">
+
+					<h3 class="branded-heading">signup</h3>
+					<p>Signup to recieve news and updates from Mora Estate. Your information isn’t shared with anyone and we promise not to spam you.</p>
 
 
 						<form action="">
 							
-							<div class="table-responsive contact-form">
-								<table class="table">
+							<div class="contact-form">
+								<table class="table contact-form-table">
+										<tr>
+											<td colspan="2" class="no-edges">
+												<div class="col-xs-12">
+													<div class="row form-group">
+														<div class="col-xs-9 col-sm-9 col-md-10">
+															<div class="input-wrapper">
+																<label for="email_signup" class="input-accessor"></label>
+																<div class="form-group">
+																	<input type="text" class="form-control" id="email_signup" name="first_name">
+																	<label for="email_signup" class="input-descriptor">Your email</label>
+																</div>
+															</div>
+														</div>
+														<div class="col-xs-3 col-sm-3 col-md-2 btn-wrapper">
+															<button type="submit" class="btn btn-brand-bold">signup</button>
+														</div>
+
+														<div class="clearfix"></div>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div> <!-- /.table-responsive -->
+
+						</form> <!-- contact form ends -- /form -->
+
+
+
+
+					<h3 class="branded-heading margin-top">contact</h3>
+
+					<p>We would love to hear from you. Feel free to contact with any inqueries using the form below. We will respond to you just as soon as we can. Cheers!</p>
+
+
+						<form action="">
+							
+							<div class="contact-form">
+								<table class="table contact-form-table">
 									<tbody>
 										<tr>
 											<td>
@@ -148,16 +189,21 @@
 										<tr>
 											<td colspan="2">
 												<div class="form-group">
-													<div class="pull-left">
-														<label for="join_club" class="checkbox">
-															<input type="checkbox" name="join_club" id="join_club" value="1" />
-															I'm interested in joining the mora wine club
-														</label>
-													</div>
-
+													<label for="join_club" class="checkbox">
+														<input type="checkbox" name="join_club" id="join_club" value="1" />
+														<span></span> I’d like to recieve information about joining the Mora Wine Club
+													</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" class="no-edges">
+												<div class="form-group">
 													<div class="pull-right">
 														<button type="submit" class="btn btn-brand-bold">send</button>
 													</div>
+
+													<div class="clearfix"></div>
 												</div>
 											</td>
 										</tr>
@@ -175,19 +221,20 @@
 			
 
 			<footer>
-				<div class="container">
-					<div class="footer-wrapper">
-						<div class="footer-logo"> <i class="icon-logotype-small"></i> </div>
-						<div class="footer-quicklinks">
-							<ul>
-								<li><a href="#">terms &amp; conditions</a></li>
-								<li><a href="#">contact us</a></li>
-								<li><a href="#">privacy policy</a></li>
-							</ul>
+					<div class="texture-corner"></div>
+					<div class="container">
+						<div class="footer-wrapper">
+							<div class="footer-logo"> <i class="icon-logotype-small"></i> </div>
+							<div class="footer-quicklinks">
+								<ul>
+									<li><a href="#">terms &amp; conditions</a></li>
+									<li><a href="#">contact us</a></li>
+									<li><a href="#">privacy policy</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-			</footer>
+				</footer>
 
 
 	</div>

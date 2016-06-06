@@ -5,10 +5,21 @@
 	background-color: #000;
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
-	background-image: url(../images/scratched-texture.png);
+	background-image: url(../images/scratched-texture.jpg);
 	-webkit-background-size: cover;
 	background-size: cover;
 	position: relative;
+
+	&.has-texture-corner{
+		z-index: 5;
+	}
+
+	&.texture-offset-dark1{
+		background-position: 50% -282px;
+		-webkit-background-size: inherit;
+		background-size: inherit;
+		z-index: 5;
+	}
 
 	@include minHeightPollyfill;
 
@@ -64,6 +75,10 @@
 		background: none;
 	}
 
+
+
+
+
 	.section-wrapper{
 		position: relative;
 		z-index: 5;
@@ -77,6 +92,8 @@
 
 	  .container{
 	  	&.is-flex{
+	  		-webkit-flex-direction: column;
+	  		flex-direction: column;
 	  		display: flex;
 			  align-items: center;
 			  justify-content: center;
@@ -97,6 +114,7 @@
 	  .section-title{
 	  	text-align: right;
 	  	align-self: flex-start;
+	  	vertical-align: top;
 
 	  	&.text-left{
 	  		text-align: left;
@@ -106,10 +124,41 @@
 	  		@include SUWoodwardScript;
 	  		font-size: 94px;
 	  		@include brand-color(dark2);
+	  		-webkit-transform: rotate(-5deg) translateY(10px);
+	  		-moz-transform: rotate(-5deg) translateY(10px);
+	  		-ms-transform: rotate(-5deg) translateY(10px);
+	  		-o-transform: rotate(-5deg) translateY(10px);
 	  		transform: rotate(-5deg) translateY(10px);
 	  		margin-top: 50px;
 	  		line-height: 40px;
 	  		display: inline-block;
+
+	  		@include respond-to(small) {
+	  			font-size: 80px;
+	  		}
+
+	  		@include respond-to(x-small) {
+	  			font-size: 60px;
+	  			display: block;
+	  			text-align: left;
+	  		}
+	  	}
+
+
+	  	&.no-rotate{
+	  		h2, h3{
+	  			-webkit-transform: rotate(0deg) translate(0px, 0px);
+	  			-moz-transform: rotate(0deg) translate(0px, 0px);
+	  			-ms-transform: rotate(0deg) translate(0px, 0px);
+	  			-o-transform: rotate(0deg) translate(0px, 0px);
+	  			transform: rotate(0deg) translate(0px, 0px);
+	  		}
+	  	}
+
+	  	&.align-center{
+	  		// align-self: center;
+	  		padding-bottom: 30px;
+	  		margin-top: 0;
 	  	}
 	  }
 
@@ -117,6 +166,7 @@
 			text-align: center;
 			color: #fff;
 			padding: 120px 0 100px;
+			// flex: 100%;
 
 			@include respond-to(medium) {
 				padding: 80px 0 80px;
@@ -161,6 +211,10 @@
 
 				  max-width: 500px;
 				  margin: 0 auto;
+
+				  @include respond-to(small) {
+			  		padding-top: 50px;
+			  	}
 				}
 
 				&.extended-width{
@@ -211,6 +265,60 @@
 			}
 		}
 	}
+
+
+	//.vertical-section level
+	&.texture-offset-dark1,
+	&.texture-offset-white1{
+		.section-wrapper{
+			.section-title{
+				margin-top: -130px;
+			}
+		}
+
+		&.with-offset-dark2{
+			.section-wrapper{
+				.section-title{
+					margin-top: -165px;
+				}
+			}
+		}
+	}
+
+	&.texture-offset-white1{
+		.section-wrapper{
+			.section-content{
+				padding-top: 80px;
+			}
+		}
+	}
+
+	&.texture-spacer-dark1{
+		.section-wrapper{
+			.section-content{
+				padding-bottom: 300px;
+			}
+		}
+	}
+
+	&.texture-spacer-dark2{
+		.section-wrapper{
+			.section-content{
+				padding-bottom: 220px;
+			}
+		}
+	}
+
+	&.texture-spacer-white1{
+		.section-wrapper{
+			.section-content{
+				padding-bottom: 220px;
+			}
+		}
+	}
+
+
+
 }
 
 
@@ -271,6 +379,24 @@
 		height: 283px;
 		margin-top: -280px;
 	}
+
+	&.is-texture-3{
+		background-image: url(../images/black-texture1.png);
+		height: 411px;
+		margin-top: -282px;
+	}
+
+	&.is-texture-4{
+		background-image: url(../images/white-texture3.png);
+		height: 294px;
+		margin-top: -294px;
+	}
+
+	&.is-texture-5{
+		background-image: url(../images/white-texture4.png);
+		height: 300px;
+		margin-top: -300px;
+	}
 }
 
 
@@ -290,6 +416,10 @@
 			text-align: left;
 		}
 
+		&.text-center {
+			text-align: center;
+		}
+
 		h3{
 			@include SUWoodwardScript;
   		font-size: 138px;
@@ -297,6 +427,21 @@
   		line-height: 40px;
   		display: inline-block;
   		margin-top: 0px;
+		}
+
+		h2 {
+			@include NewBaskervilleStdRoman;
+			font-size: 80px;
+			display: inline-block;
+			margin-bottom: 10px;
+			position: relative;
+    	margin-top: 45px;
+		}
+
+		&.no-rotation{
+			h3{
+				transform: rotate(0deg) translateY(0px);
+			}
 		}
 
 	}
@@ -318,7 +463,90 @@
 			padding-top: 40px;
 		}
 
+		&.is-article{
+			padding-top: 0;
+		}
+
+		&.default-styles{
+			@include CalibreMedium;
+			font-size: 20px;
+		}
+
+		&.contact-body{
+			max-width: 720px;
+			margin-left: auto;
+			margin-right: auto;
+			padding-top: 0;
+		}
+
+		.branded-heading{
+			@include SUWoodwardScript;
+  		font-size: 100px;
+  		display: block;
+  		margin-top: 0px;
+
+  		&.margin-top{
+				padding-top: 100px;
+				@include respond-to(small) {
+					padding-top: 50px;
+				}
+			}
+
+		}
+
 		@include borderedTable;
+	}
+
+
+
+	&.generic-page{
+		.page-title{
+			-webkit-transform: rotate(0deg) translate(0px, 0px);
+			-moz-transform: rotate(0deg) translate(0px, 0px);
+			-ms-transform: rotate(0deg) translate(0px, 0px);
+			-o-transform: rotate(0deg) translate(0px, 0px);
+			transform: rotate(0deg) translate(0px, 0px);
+
+			h2{
+				font-size: 80px;
+				display: block;
+				text-align: center;
+				text-transform: inherit;
+				padding: 50px 0;
+
+				@include respond-to(small) {
+		  		font-size: 60px;
+		  		padding-bottom: 30px;
+		  	}
+
+		  	@include respond-to(x-small) {
+		  		font-size: 40px;
+		  		padding-bottom: 15px;
+		  	}
+			}
+		}
+
+		.page-body{
+			max-width: 845px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 200px;
+
+			h1, h2, h3, h4, h5 {
+				margin-bottom: 50px;
+			}
+
+			&, p{
+				@include NewBaskervilleStdRoman;
+				font-size: 18px;
+				letter-spacing: 1px;
+				line-height: 1.625em;
+			}
+
+			p{
+				margin-bottom: 30px;
+			}
+		}
 	}
 
 }

@@ -44,6 +44,8 @@
 				img{
 					max-width: 100%;
 
+					max-height: 460px;
+
 					@include respond-to(x-large) {
 						max-height: 300px;
 					}
@@ -164,6 +166,8 @@
 
 				img{
 					max-width: 100%;
+
+					max-height: 320px;
 
 					@include respond-to(x-large) {
 						max-height: 300px;

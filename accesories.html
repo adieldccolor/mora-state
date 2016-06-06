@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="assets/css/vendor.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body style="background:#fff">
+
+<div class="container">
+	<h1>Add acccesory</h1>
+	<form method="get">
+	
+	<!-- AQUI ESTA LO IMPORANTTE -->
+	<div class="accesory-images">
+		<h3>Surround Images</h3>
+
+		<div class="ai-toolbar">
+			<select name="textures" id="textures" class="form-control js-row-categories">
+				<option value="">Select a texture</option>
+				<option value="1">Firebrick QGC</option>
+				<option value="2">Firebrick QCR</option>
+				<option value="3">Firebrick RG</option>
+				<option value="4">Red Amber</option>
+				<option value="5">Black Amber</option>
+			</select>
+			<a href="javascript:;" class="btn btn-default js-add-row">Add image row</a>
+		</div>
+
+		<div class="ai-files">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>File</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody class="rows_list">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- AQUI TERMINA EL HTML -->
+
+	<div class="form-group">
+		<input type="submit" value="Upload" class="btn btn-success">
+	</div>
+
+	</form>
+
+
+</div>
+
+<!-- jquery -->
+<script src="assets/js/vendor.js"></script>
+
+<script>
+	function getRowTemplate() {
+		var row_number = 0;
+		var category = [];
+		if ( arguments.length && typeof arguments[0] == "number" ) {
+			row_number = arguments[0] + 1;
+		}
+		if ( arguments.length && typeof arguments[1] == "object" ) {
+			category = arguments[1];
+		}
+
+		return '<tr><td><label for="image_'+row_number+'" class="ai-file-descriptor">'+category[1]+'</label></td><td><input type="file" name="images[]" id="image_'+row_number+'"><input type="hidden" name="images_texture[]" value="'+category[0]+'"></td><td><a href="javascript:;" class="btn btn-danger js-remove-row">&times; Remove row</a></td></tr>';
+	}
+
+	$(function(){
+		$('body').on('click', '.js-add-row', function() {
+			var $rowList = $('.rows_list');
+			var rows = $rowList.find('tr').length;
+			var $categories = $('.js-row-categories');
+			var category = [];
+			var tpl;
+			
+			if ( $categories.val() == "" ) {
+				alert('You must select a category first');
+				$categories.trigger('focus');
+				return false;
+			}
+
+			category[0] = $categories.val();
+			category[1] = $categories.find('option[value="'+category[0]+'"]').text();
+
+			tpl = getRowTemplate.call(this, rows, category);
+
+			var $existentRow = $rowList.find('input[type="hidden"][value="'+category[0]+'"]');
+
+			if ( $existentRow.length ) {
+				alert("You can only have 1 image by texture type, and you already have a field for " + category[1]);
+				$categories.trigger('focus');
+				return false;
+			}
+
+			$rowList.append(tpl);
+
+			$categories.val('').trigger('focus');
+		}).on('click', '.js-remove-row', function() {
+			$(this).closest('tr').remove();
+		}).on('change', '.js-row-categories', function() {
+			if ( $(this).val() != '' ) {
+				$('.js-add-row').trigger('focus');
+			}
+		});
+	});
+</script>
+	
+</body>
+</html>

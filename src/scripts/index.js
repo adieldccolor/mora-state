@@ -75,15 +75,27 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		$('body').on('click', '.js-hambuger', function(e) {
 			e.preventDefault();
 
-			$('body').addClass(openClass);
+			openMenu(openClass);
 
 			return false;
 		}).on('click', '.overlay-menu .js-close, .overlay-menu .overlay', function(e) {
 			e.preventDefault();
 
-			$('body').removeClass(openClass);
+			function closeMenu() {
+				$('body').removeClass(openClass);
+			}
+
+			timedCallback(closeMenu);
 
 			return false;
+		})
+		//on click everywheren but no .menu-box close it
+		.on('click', '.overlay-menu *', function(e) {
+
+			if(!$(event.target).parents().andSelf().is(".menu-box")){
+	        $('body').removeClass(openClass);
+	    }
+
 		});
 	}
 
@@ -105,7 +117,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			newWidth = newWidth - reducerWidth;
 		} 
 
-		if ( !isNaN(reducer) ) {
+		if ( reducer && !isNaN(reducer) ) {
 			newHeight = newWidth = new Number(reducer) + 'px';
 		}
 
@@ -128,8 +140,68 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 
 	//add new method
 	morastate.addPublicMethod = function(method) {
+		if ( typeof method === "string" ) {
+			method = { name: method, callback: ( arguments[1] || function(){} ) };
+		}
+
 		morastate.publicMethods.push(method);
 	}
+
+	//timedCallback
+	morastate.addPublicMethod('__timedCalls', []);
+	morastate.addPublicMethod(
+		'timedCallback',
+		function() {
+			var _callback = function() {}, _time = 300, _id = '_call-0';
+
+			if ( typeof arguments[0] === "function" ) {
+				_callback = arguments[0];
+			}
+
+			if ( typeof arguments[1] === "number" ) {
+				_time = arguments[0];
+			}
+
+			var _index = -1;
+			for (var i = 0; i < __timedCalls.length; i++) {
+				if ( __timedCalls[i]._fn == _callback && __timedCalls[i]._time == _time ) {
+					_index = i;
+					_id = __timedCalls[i]._id;
+				}
+			}
+
+			if ( _index < 0 ) {
+				_id = '_call-' + __timedCalls.length;
+				_index = __timedCalls.length;
+				__timedCalls.push({
+					_fn: _callback,
+					_time: _time,
+					_id: _id,
+					_timer: null
+				});
+			}
+
+			if ( __timedCalls[_index]._timer ) {
+				clearTimeout(__timedCalls[_index]._timer);
+			}
+
+			__timedCalls[_index]._timer = setTimeout(_callback, _time);
+		}
+	);
+
+	//open menu
+	morastate.addPublicMethod(
+		'openMenu',
+		function (add_class) {
+			var $menuBox = $('.menu-box');
+
+			TweenMax.to($menuBox, 0, { scale: 0.8, opacity: 0 });
+			TweenMax.to($menuBox, 0.3, { scale: 1, opacity: 1, delay: 0.3 });
+
+			$('body').addClass(add_class||'menu-is-open');
+
+		}
+	);
 
 	//add bigvideo instance init to window object, so its public
 	morastate.addPublicMethod({
@@ -155,7 +227,11 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			}
 
 			if (Modernizr.touch) {
-			  $('.vertical-section').first().css({ backgroundImage: 'url('+ poster +')' });
+			  $('.vertical-section').first().css({ backgroundImage: 'url('+ poster +')', 
+			                                     backgroundSize: 'cover',
+			                                     webkitBackgroundSize: 'cover',
+			                                     backgroundPosition: 'center center'
+			                                   });
 			} else {
 				BV = new $.BigVideo(); BV.init();
 			  BV.show(settings,{ambient:true});
@@ -167,7 +243,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 	//export public methods
 	morastate.exportPublicMethods = function() {
 		for (var i = 0; i < morastate.publicMethods.length; i++) {
-			if ( typeof morastate.publicMethods[i].callback === "function" ) {
+			if ( typeof morastate.publicMethods[i].callback !== "undefined" ) {
 				window[morastate.publicMethods[i].name] = morastate.publicMethods[i].callback;
 			}
 		}

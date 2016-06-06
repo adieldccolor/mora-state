@@ -21,6 +21,8 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		var $logo = $preloader.find('.container');
 		var $overlay = $preloader.find('.overlay');
 		var $content = $('.content-wrapper');
+		var $progress = $('.preload-progress');
+		var $preloadContent = $('.preload-content');
 
 		if ( arguments.length && arguments[0] == "isTouch" ) {
 			$('body').removeClass('loader-active');
@@ -29,14 +31,18 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			return false;
 		}
 
-		TweenMax.to($content, 0, { opacity: 0.1 });
+		TweenMax.to($content, 0, { opacity: 0.9 });
 
 		setTimeout(function(){
-			TweenMax.to($preloader, 0.5, { opacity: 0, onComplete: function() {
-				$('body').removeClass('loader-active');
-				TweenMax.to($content, 0.5, { opacity: 1, delay: 0.1 });
+			TweenMax.to($preloadContent, 0.5, { opacity: 0, onComplete: function() {
+				TweenMax.to($overlay, 0.5, { opacity: 0, onComplete: function() {
+					TweenMax.to($preloader, 0.5, { opacity: 0, borderWidth: 0, onComplete: function() {
+						$('body').removeClass('loader-active');
+					} });
+					TweenMax.to($content, 0.5, { opacity: 1 });
+				} });
 			} });
-		}, 1000);
+		}, 500);
 
 
 		applyCallbacks.apply(this);
@@ -44,7 +50,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 	}
 
 	function loadProgress() {
-		var progress = (preload.progress * 100) + '%';
+		var progress = ((preload.progress * 90) + 10) + '%';
 		TweenMax.to( $('.preload-progress'), 0.5, { width: progress });
 	}
 
@@ -96,15 +102,19 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			imgs.push(img);
 		});
 
-		imgs.push('assets/images/scratched-texture.jpg');
-		imgs.push('assets/images/scratched-texture.png');
-		imgs.push('assets/images/texture.jpg');
+		imgs.push((window.__template_url||'.') + '/assets/images/scratched-texture.jpg');
+		imgs.push((window.__template_url||'.') + '/assets/images/scratched-texture.png');
+		imgs.push((window.__template_url||'.') + '/assets/images/texture.jpg');
 
 		for (var i = 0; i < _preloadFiles.length; i++) {
 			var files = _preloadFiles[i].files;
 			if ( files.length ) {
 				for (var i = 0; i < files.length; i++) {
-					imgs.push(files[i]);
+					var fileExitension = files[i].split('.');
+					fileExitension = fileExitension[ fileExitension.length - 1 ];
+					if ( ['webm', 'mp4', 'ogv', 'ogg', 'mp3'].indexOf(fileExitension) < 0 ) {
+						imgs.push(files[i]);
+					}
 				}
 			}
 		}

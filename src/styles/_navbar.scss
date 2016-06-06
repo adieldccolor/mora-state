@@ -11,9 +11,18 @@
 	left: 0;
 	width: 100%;
 
+	@include respond-to(small) {
+		height: 80px;
+	}
+
 	.container,
 	.container-fluid{
 		padding-top: 36px;
+
+		@include respond-to(small) {
+			text-align: center;
+			padding-top: 26px;
+		}
 	}
 
 	.logotype{
@@ -23,6 +32,14 @@
 		vertical-align: middle;
 		color: #000;
 
+		@include respond-to(small) {
+			.icon-logotype{
+				&:before{
+					content: "\e900";
+				}
+			}
+		}
+
 		@include respond-to(x-small) {
 			font-size: 20px;
 		}
@@ -31,6 +48,14 @@
 		&:hover,
 		&:focus{
 			text-decoration: none;
+		}
+	}
+
+	.pull-right{
+		@include respond-to(small) {
+			float: none !important;
+			display: inline-block;
+			margin-left: 20px;
 		}
 	}
 
@@ -63,6 +88,10 @@
 
 .navigation-spacer{
 	height: 100px;
+	@include respond-to(small) {
+		height: 80px;
+	}
+
 	&.is-over-banner{
 		position: absolute;
 	}
