@@ -41,6 +41,7 @@ footer{
 					display: inline-block;
 					border-right: 1px solid #{map-get($colors, dark1)};
 					line-height: 10px;
+					font-size: 13px;
 
 					&:last-child{
 						border-right: none;
@@ -54,13 +55,60 @@ footer{
 						padding: 0 20px;
 						letter-spacing: 3px;
 						text-transform: uppercase;
+						position: relative;
+						line-height: 1;
+
+						&:after{
+							content: "";
+							position: absolute;
+							bottom: -8px;
+							left: 50%;
+							height: 2px;
+							width: 0%;
+							background-color: #fff;
+							opacity: 0.1;
+
+							@include respond-to(x-small) {
+								bottom: 4px;
+							}
+						}
 
 						&,
 						&:hover,
 						&:focus{
 							text-decoration: none;
 						}
+
+						&:hover,
+						&:focus{
+							color: lighten(#404041, 20);
+							&:after{
+								width: 100%;
+								opacity: 0.8;
+								left: 0;
+								-webkit-transition: all 0.3s;
+								-moz-transition: all 0.3s;
+								-ms-transition: all 0.3s;
+								-o-transition: all 0.3s;
+								transition: all 0.3s;
+							}
+						}
 					}
+
+
+					@include respond-to(x-small) {
+						display: block;
+						border-right: none;
+						text-align: center;
+
+						a{
+							display: inline-block;
+							padding: 10px 0;
+							color: lighten(#414042, 1);
+							font-size: 1.1em;
+						}
+					}
+
 				}
 			}
 		}

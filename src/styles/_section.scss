@@ -176,6 +176,16 @@
 				padding: 100px 0;
 			}
 
+			&.article-section-content{
+				@include respond-to(large) {
+					padding-top: 80px;
+					padding-bottom: 120px;
+				}
+				@include respond-to(medium) {
+					padding-top: 60px;
+				}
+			}
+
 			.text-title{
 				h2{
 					@include CalibreMedium;

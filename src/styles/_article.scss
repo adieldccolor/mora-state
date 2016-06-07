@@ -1,14 +1,23 @@
 
 
 .article-heading{
-	text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+	text-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
 
 	h1{
 		margin: 0;
 		padding: 0;
+		line-height: 1em;
 
 		@include NewBaskervilleStdRoman;
 		font-size: 80px;
+
+		@include respond-to(medium) {
+			font-size: 60px;
+		}
+
+		@include respond-to(small) {
+			font-size: 40px;
+		}
 	}
 
 	.article-date{
@@ -77,4 +86,37 @@
 			}
 		}
 	}
+}
+
+
+
+.page-content.article-body{
+	padding-bottom: 0px;
+}
+
+
+
+.page-content .page-body.is-article.article-comments,
+.article-comments{
+	max-width: 840px;
+	padding: 200px 0 250px;
+	@include respond-to(x-large) {
+		padding: 100px 0 150px;
+	}
+	@include respond-to(medium) {
+		padding: 50px 0 80px;
+	}
+
+	.article-comments-heading{
+		@include SUWoodwardScript;
+		font-size: 100px;
+		text-transform: none;
+		-webkit-transform: rotate(-3deg) translateY(5px);
+		-moz-transform: rotate(-3deg) translateY(5px);
+		-ms-transform: rotate(-3deg) translateY(5px);
+		-o-transform: rotate(-3deg) translateY(5px);
+		transform: rotate(-3deg) translateY(5px);
+		display: inline-block;
+	}
+
 }

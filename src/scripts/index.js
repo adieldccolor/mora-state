@@ -100,14 +100,17 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 	}
 
 	//resize by viewport height
-	morastate.resizeByViewport = function($el, prop, reducer) {
-		morastate.addResizeCallback(morastate.resizeByViewport, $el, prop, reducer);
+	var jsViewport = morastate.resizeByViewport = function($el, prop, reducer) {
+		morastate.addResizeCallback(jsViewport, $el, prop, reducer);
 
 		var winHeight = $(window).height();
 		var winWidth = $(window).width();
 		var newHeight = winHeight;
 		var newWidth = winWidth;
 		var reducerHeight, reducerWidth;
+		var minAspect = $el.find('.js-keep-aspect').length 
+				? $el.find('.js-keep-aspect').outerHeight() : 0;
+		var clutter = 100; //the aprox. height off a textured corner
 
 		if ( reducer && isNaN(reducer) ) {
 			reducerHeight = $(reducer).outerHeight();
@@ -119,6 +122,10 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 
 		if ( reducer && !isNaN(reducer) ) {
 			newHeight = newWidth = new Number(reducer) + 'px';
+		}
+
+		if ( minAspect && (minAspect + clutter) > newHeight ) {
+			newHeight = minAspect + clutter;
 		}
 
 		if ( prop == 'height' || prop == "min-height" ) {
