@@ -1,20 +1,20 @@
 
 .product-details{
-	padding-top: 230px;
+	padding-top: 80px;
 	padding-bottom: 80px;
 
 	@include respond-to(x-large) {
-		padding-top: 100px;
+		padding-top: 50px;
 		padding-bottom: 50px;
 	}
 
 	@include respond-to(large) {
-		padding-top: 80px;
+		padding-top: 40px;
 		padding-bottom: 30px;
 	}
 
 	@include respond-to(medium) {
-		padding-top: 50px;
+		padding-top: 30px;
 		padding-bottom: 0;
 	}
 

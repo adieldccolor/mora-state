@@ -11,6 +11,7 @@ var cleanCSS = require('gulp-clean-css');
 var sourcemaps = require('gulp-sourcemaps');
 
 var isProduction = false;
+var folder_root = '';
 
 gulp.task('dist-bower-css', function() {
 	console.log("Bundling bower_components stylesheets");
@@ -81,7 +82,7 @@ gulp.task('dist-app-styles', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulpIf(isProduction, cleanCSS()))
     .pipe(gulpIf(!isProduction, sourcemaps.write()))
-    .pipe(gulp.dest('assets/css'));
+    .pipe(gulp.dest(folder_root + 'assets/css'));
 });
 
 gulp.task('dist-app-js', function() {
@@ -94,7 +95,7 @@ gulp.task('dist-app-js', function() {
     }))
     .pipe(gulpIf(isProduction, uglify()))
     .pipe(gulpIf(!isProduction, sourcemaps.write()))
-    .pipe(gulp.dest('assets/js'));
+    .pipe(gulp.dest(folder_root + 'assets/js'));
 });
 
 gulp.task('dist-copy-fonts', function() {
@@ -104,10 +105,18 @@ gulp.task('dist-copy-fonts', function() {
 });
 
 gulp.task('dist-set-production', function() {
-	console.log("Bundling for Production");
+  console.log("Bundling for Production");
   isProduction = true;
   return isProduction;
 });
 
+gulp.task('dist-set-wordpress', function() {
+  console.log("Bundling for Wordpress");
+  folder_root = '../../morastate/wp-content/themes/mora-state/';
+  console.log('Send files to: ' + folder_root + 'assets/');
+  return folder_root;
+});
+
 gulp.task('default', ['dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
 gulp.task('production', ['dist-set-production', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
+gulp.task('wordpress', ['dist-set-wordpress', 'dist-set-production', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);

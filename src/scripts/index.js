@@ -10,9 +10,19 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 	var stellarConf = {
 				horizontalScrolling: false,
 				verticalOffset: 0,
-				responsive: true
+				responsive: true,
+				positionProperty: 'transformVertical'
 			};
 	var BV;
+
+
+	$.stellar.positionProperty.transformVertical = {
+	  setPosition: function($el, x, startX, y, startY) {
+	    $el.css('transform', 'translateY(' +
+	      (y - startY) + 'px' +
+	      ')');
+	  }
+	}
 	
 	//This object will contain all callbacks that will be triggered in window.resize
 	morastate.resizeCallbacks = [];
