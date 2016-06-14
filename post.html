@@ -82,7 +82,7 @@
 				<div class="navigation-spacer is-over-banner"></div>
 			</div> <!-- /.navigation-wrapper -->
 
-			<section class="vertical-section js-has-image is-under-menu js-viewport" style="background-image: url('assets/images/food.jpg'); background-position: bottom center;">
+			<section class="vertical-section js-has-image is-under-menu js-viewport post-image" style="background-image: url('assets/images/food.jpg'); background-position: bottom center;">
 				<div class="section-wrapper js-viewport">
 						<div class="container">
 							<div class="section-content js-keep-aspect article-section-content">
@@ -128,7 +128,16 @@
 
 			<section class="article-meta">
 				<div class="row">
-					<div class="col-xs-12 col-sm-4"><a href="#">Share</a></div>
+					<div class="col-xs-12 col-sm-4">
+						<a href="#" class="js-show-share">Share</a>
+						<div class="share-icons">
+							<a href="#" class="js-trigger-share" data-share="facebook"><i class="fa fa-facebook"></i></a>
+							<a href="#" class="js-trigger-share" data-share="twitter"><i class="fa fa-twitter"></i></a>
+							<a href="#" class="js-trigger-share" data-share="googleplus"><i class="fa fa-google-plus"></i></a>
+							<a href="#" class="js-trigger-share" data-share="linkedin"><i class="fa fa-linkedin"></i></a>
+							<a href="#" class="js-trigger-share" data-share="pinterest"><i class="fa fa-pinterest"></i></a>
+						</div>
+					</div>
 					<div class="col-xs-12 col-sm-4"><a href="#">Category</a></div>
 					<div class="col-xs-12 col-sm-4"><a href="#comments">Comments</a></div>
 				</div>
@@ -143,9 +152,74 @@
 						<h2 class="article-comments-heading">comments</h2>
 					</div>
 
-					<p>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-					</p>
+					<div class="comments-list">
+						<ul>
+							<li>
+								<div class="comment-author"><a href="#">user name</a></div>
+								<div class="comment-date">June 3rd, 2016 at 7:00am</div>
+								<div class="comment-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus</div>
+							</li>
+							<li>
+								<div class="comment-author"><a href="#">user name</a></div>
+								<div class="comment-date">June 3rd, 2016 at 7:00am</div>
+								<div class="comment-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus</div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="comments-reply">
+						<h2>leave a reply</h2>
+						<form action="">
+						
+							<div class="generic-form">
+								<table class="table contact-form-table">
+									<tbody>
+										<tr>
+											<td>
+												<label for="your_name" class="input-accessor"></label>
+												<div class="form-group">
+													<input type="text" class="form-control" id="your_name" name="your_name">
+													<label for="your_name" class="input-descriptor">Your name</label>
+												</div>
+											</td>
+											<td>
+												<label for="email" class="input-accessor"></label>
+												<div class="form-group">
+													<input type="text" class="form-control" id="email" name="email">
+													<label for="email" class="input-descriptor">email</label>
+												</div>
+											</td>
+										</tr>
+										
+										<tr>
+											<td colspan="2">
+												<label for="comment" class="input-accessor"></label>
+												<div class="form-group">
+													<div class="textarea-wrapper">
+														<textarea class="form-control" id="comment" name="comment" rows="10"></textarea>
+													</div>
+													<label for="comment" class="input-descriptor">comment</label>
+												</div>
+											</td>
+										</tr>
+										
+										<tr>
+											<td colspan="2" class="no-edges">
+												<div class="form-group">
+													<div class="pull-right">
+														<button type="submit" class="btn btn-brand-bold">submit</button>
+													</div>
+
+													<div class="clearfix"></div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div> <!-- /.table-responsive -->
+
+						</form> <!-- contact form ends -- /form -->
+					</div>
 
 
 					</div>
@@ -175,6 +249,7 @@
 
 	
 
+	<script src="https://use.fontawesome.com/595569318f.js"></script>
 	<script type="text/javascript" src="assets/js/vendor.js"></script>
 	<script type="text/javascript" src="assets/js/main.js"></script>
 </body>

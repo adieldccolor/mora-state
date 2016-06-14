@@ -10,6 +10,12 @@
 	background-size: cover;
 	position: relative;
 
+	// -webkit-transition: background-position 0.1s;
+	// -moz-transition: background-position 0.1s;
+	// -ms-transition: background-position 0.1s;
+	// -o-transition: background-position 0.1s;
+	// transition: background-position 0.1s;
+
 	&.has-texture-corner{
 		z-index: 5;
 	}

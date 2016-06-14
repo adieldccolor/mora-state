@@ -96,3 +96,109 @@
 		position: absolute;
 	}
 }
+
+
+
+/**
+ * Note: I have omitted any vendor-prefixes for clarity.
+ * Adding them is left as an exercise for the reader.
+ */
+
+ .navigation--clone{
+ 	display: none;
+ }
+
+ .navigation--clone.headroom{
+ 	display: block;
+ }
+
+.navigation.headroom--pinned.headroom--not-top, 
+.navigation.headroom--unpinned {
+	will-change: transform, background-color, height;
+	-webkit-transition: -webkit-transform 200ms linear, background-color 200ms linear, height 200ms linear;
+	-moz-transition: -moz-transform 200ms linear, background-color 200ms linear, height 200ms linear;
+	-ms-transition: -ms-transform 200ms linear, background-color 200ms linear, height 200ms linear;
+	-o-transition: -o-transform 200ms linear, background-color 200ms linear, height 200ms linear;
+	transition: transform 200ms linear, background-color 200ms linear, height 200ms linear;
+
+	.container-fluid{
+  	-webkit-transition: padding-top 0.2s;
+  	-moz-transition: padding-top 0.2s;
+  	-ms-transition: padding-top 0.2s;
+  	-o-transition: padding-top 0.2s;
+  	transition: padding-top 0.2s;
+  }
+
+  .logotype,
+  .burger {
+  	-webkit-transition: font-size 0.2s, color 0.2s;
+  	-moz-transition: font-size 0.2s, color 0.2s;
+  	-ms-transition: font-size 0.2s, color 0.2s;
+  	-o-transition: font-size 0.2s, color 0.2s;
+  	transition: font-size 0.2s, color 0.2s;
+  }
+
+	position: fixed;
+	left: 30px;
+	right: 30px;
+	top: 0;
+	width: auto;
+	text-align: center;
+
+	@include respond-to(small){
+    left: 20px;
+    right: 20px;
+  }
+
+  @include respond-to(x-small){
+    left: 10px;
+    right: 10px;
+  }
+
+  .icon-logotype{
+		&:before{
+			content: "\e900";
+		}
+	}
+
+	.pull-right{
+		float: none !important;
+		display: inline-block;
+		margin-left: 20px;
+	}
+
+	.logotype,
+  .burger {
+  	color: #000;
+  }
+}
+
+.admin-bar .headroom--pinned.headroom--not-top, 
+.admin-bar .headroom--unpinned {
+	top: 32px;
+
+	@media screen and (max-width: 782px) {
+		top: 46px;
+	}
+}
+
+.navigation.headroom--pinned.headroom--not-top {
+    transform: translateY(0%);
+    background-color: #fff;
+    height: 80px;
+
+    .logotype{
+    	font-size: 19px;
+    }
+
+    .burger{
+    	font-size: 15px;
+    }
+
+    .container-fluid{
+    	padding-top: 25px;
+    }
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}

@@ -111,6 +111,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		var minAspect = $el.find('.js-keep-aspect').length 
 				? $el.find('.js-keep-aspect').outerHeight() : 0;
 		var clutter = 100; //the aprox. height off a textured corner
+		var reduce = $el.attr('data-reduce') != undefined;
 
 		if ( reducer && isNaN(reducer) ) {
 			reducerHeight = $(reducer).outerHeight();
@@ -121,7 +122,12 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		} 
 
 		if ( reducer && !isNaN(reducer) ) {
-			newHeight = newWidth = new Number(reducer) + 'px';
+			if ( reduce ) {
+				newHeight = ( newHeight - new Number(reducer) ) + 'px';
+				newWidth = ( newWidth - new Number(reducer) ) + 'px';
+			} else {
+				newHeight = newWidth = new Number(reducer) + 'px';
+			}
 		}
 
 		if ( minAspect && (minAspect + clutter) > newHeight ) {
@@ -259,13 +265,31 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 
 	//contact form
 	morastate.contactFormInputs = function() {
-		$('.contact-form').on('focus', '.form-control', function() {
+		$('.contact-form, .generic-form').on('focus', '.form-control', function() {
 			$(this).closest('td').addClass('is-focused');
 		}).on('blur', '.form-control', function() {
 			$(this).closest('td').removeClass('is-focused notempty');
 
 			if ( $(this).val().trim().length ) {
 				$(this).closest('td').addClass('notempty');
+			}
+		});
+	}
+
+
+	//scroll animation for navigation
+	morastate.navigationScrollAnimation = function() {
+		var $nav = $('.navigation').clone().addClass('navigation--clone');
+		$('.navigation').after($nav);
+		var headroom  = new Headroom($nav[0], { offset: 0 });
+		// initialise
+		headroom.init();
+
+		$(window).on('scroll', function() {
+			if ( $(window).scrollTop() > 100 ) {
+				$('.navigation--clone').addClass('headroom');
+			} else {
+				$('.navigation--clone').removeClass('headroom');
 			}
 		});
 	}
@@ -281,6 +305,8 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		morastate.enableFullHeight();
 		morastate.exportPublicMethods();
 		morastate.contactFormInputs();
+
+		morastate.navigationScrollAnimation();
 	}
 
 	//start when all content is loaded

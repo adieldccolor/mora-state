@@ -84,17 +84,44 @@ h2,
     @include NewBaskervilleStdSemiBoldItalic;
     font-size: 20px;
     line-height: 20px;
+    background-color: transparent;
 
     padding: 20px 40px;
     border: 1px solid #fff;
     @include brand-color(light1);
     border-radius: 0px;
 
+    position: relative;
+
     &,
     &:hover,
     &:focus{
       text-decoration: none;
       box-shadow: none;
+    }
+
+
+    &:before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 100%;
+      background-color: #fff;
+      transition: all 0.2s;
+      z-index: -1;
+    }
+
+
+    &:hover,
+    &:focus{
+      color: #000;
+
+      &:before{
+        width: 100%;
+        left: 0;
+      }
     }
   }
 
@@ -104,6 +131,7 @@ h2,
     font-size: 20px;
     line-height: 20px;
     text-transform: uppercase;
+    background-color: transparent;
 
     padding: 20px 40px;
     border: 1px solid #000;
@@ -202,4 +230,10 @@ h2,
   .icon-#{$name}:before {
     content: $icon;
   }
+}
+
+
+
+.wow{
+  visibility: hidden;
 }

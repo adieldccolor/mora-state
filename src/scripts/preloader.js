@@ -28,18 +28,26 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			$('body').removeClass('loader-active');
 
 			applyCallbacks.apply(this);
+			
+			//enable animations
+			new WOW().init();
+
 			return false;
 		}
 
-		TweenMax.to($content, 0, { opacity: 0.9 });
+		// TweenMax.to($content, 0, { opacity: 0.5 });
 
 		setTimeout(function(){
 			TweenMax.to($preloadContent, 0.5, { opacity: 0, onComplete: function() {
-				TweenMax.to($overlay, 0.5, { opacity: 0, onComplete: function() {
-					TweenMax.to($preloader, 0.5, { opacity: 0, borderWidth: 0, onComplete: function() {
-						$('body').removeClass('loader-active');
-					} });
-					TweenMax.to($content, 0.5, { opacity: 1 });
+
+				TweenMax.to($preloader, 1, {borderWidth: 0});
+				TweenMax.to([$overlay, $preloader], 1, { opacity: 0, onComplete: function() {					
+					$('body').removeClass('loader-active');
+
+					//enable animations
+					new WOW().init();
+
+					// TweenMax.to($content, 0.5, { opacity: 1 });
 				} });
 			} });
 		}, 500);
@@ -71,15 +79,15 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 
 		var imgs = [];
 		$('.js-has-image').each(function() {
-			var $img = $(this);
-			var img = $img.css('background-image').slice(5, -2);
-			imgs.push(img);
+			// var $img = $(this);
+			// var img = $img.css('background-image').slice(5, -2);
+			// imgs.push(img);
 		});
 
 		$('img').each(function() {
-			var $img = $(this);
-			var img = $img[0].src;
-			imgs.push(img);
+			// var $img = $(this);
+			// var img = $img[0].src;
+			// imgs.push(img);
 		});
 
 		$('[data-videos]').each(function() {
@@ -92,7 +100,12 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			}
 
 			for (var i = 0; i < vids.length; i++) {
-				imgs.push(vids[i]);
+				var fileExitension = vids[i].split('.');
+				fileExitension = fileExitension[ fileExitension.length - 1 ];
+
+				if ( ['webm', 'mp4', 'ogv', 'ogg', 'mp3'].indexOf(fileExitension) < 0 ) {
+					imgs.push(vids[i]);
+				}
 			}
 		});
 

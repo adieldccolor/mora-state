@@ -21,6 +21,9 @@ gulp.task('dist-bower-css', function() {
           },
           "BigVideo": {
                "main": "css/bigvideo.css"
+          },
+          "wow": {
+               "main": "css/libs/animate.css"
           }
         }
       }))
@@ -41,6 +44,24 @@ gulp.task('dist-bower-js', function() {
           },
           "modernizer": {
             "main": 'modernizr.js'
+          },
+          "outlayer": {
+            "main": [
+              "item.js",
+              "outlayer.js"
+            ]
+          },
+          "isotope": {
+            "main": "dist/isotope.pkgd.js"
+          },
+          "packery": {
+            "main": "dist/packery.pkgd.js"
+          },
+          "isotope-packery": {
+            "main": "packery-mode.pkgd.js"
+          },
+          "headroom.js": {
+            "main": "dist/headroom.js"
           }
         }
       }))
