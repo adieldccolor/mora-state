@@ -62,8 +62,9 @@
 
 				.product-name{
 					@include CalibreMedium;
-					font-size: 28px;
+					font-size: 25px;
 					@include brand-color(light1);
+					letter-spacing: 0.3em;
 				}
 
 				.product-year{
@@ -185,8 +186,9 @@
 
 				.product-name{
 					@include NewBaskervilleStdSemiBold;
-					font-size: 28px;
+					font-size: 25px;
 					color: #000;
+					letter-spacing: 0.3em;
 				}
 
 				.product-year{

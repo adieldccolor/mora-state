@@ -33,11 +33,12 @@ gulp.task('dist-bower-css', function() {
       .pipe(concat('vendor.css'))
       .pipe(gulpIf(isProduction, cleanCSS()))
       .pipe(gulpIf(!isProduction, sourcemaps.write()))
-      .pipe(gulp.dest('assets/css'));;
+      .pipe(gulp.dest(folder_root + 'assets/css'));;
 });
 
 gulp.task('dist-bower-js', function() {
 	console.log("Bundling bower_components scripts");
+  console.log("Production? " + isProduction);
   return gulp.src(mainBowerFiles({
         "overrides": {
           "bootstrap": {
@@ -63,6 +64,9 @@ gulp.task('dist-bower-js', function() {
           },
           "headroom.js": {
             "main": "dist/headroom.js"
+          },
+          "videojs-vimeo": {
+            "main": "src/Vimeo.js"
           }
         }
       }))
@@ -71,7 +75,7 @@ gulp.task('dist-bower-js', function() {
       .pipe(concat('vendor.js', {sourcesContent: true}))
       .pipe(gulpIf(isProduction, uglify()))
       .pipe(gulpIf(!isProduction, sourcemaps.write()))
-      .pipe(gulp.dest('assets/js'));
+      .pipe(gulp.dest(folder_root + 'assets/js'));
 });
 
 
@@ -120,3 +124,4 @@ gulp.task('dist-set-wordpress', function() {
 gulp.task('default', ['dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
 gulp.task('production', ['dist-set-production', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
 gulp.task('wordpress', ['dist-set-wordpress', 'dist-set-production', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);
+gulp.task('wordpress-dev', ['dist-set-wordpress', 'dist-bower-css', 'dist-bower-js', 'dist-app-styles', 'dist-app-js']);

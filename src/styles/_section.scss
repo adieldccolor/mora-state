@@ -342,7 +342,23 @@
 
 
 /* ****** FALLBACK FOR NO-FLEXBOX SUPPORT ******* */
-.no-flexbox{
+.no-flexbox, .no-flexboxlegacy{
+
+	.section-wrapper.js-viewport{
+		display: table;
+		width: 100%;
+
+		.container{
+			// display: table-row;
+			height: 100%;
+		}
+
+		.section-content{
+			width: 100%;
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
 	.vertical-section{
 		&,
 		.section-wrapper{
@@ -350,10 +366,18 @@
 		}
 
 		&,
-		.section-wrapper,
-		.section-wrapper .container{
+		.section-wrapper{
 			display: table;
 			clear: both;
+		}
+
+		.section-wrapper{
+			display: table-cell;
+		}
+
+		.section-wrapper .container{
+			display: table;
+			height: 100%;
 		}
 
 		.section-content{
@@ -376,6 +400,19 @@
 			.section-content{
 				padding: 120px 80px;
 			}
+		}
+	}
+
+	.vertical-section.has-parallax{
+		display: block;
+		overflow: hidden;
+	}
+}
+
+[data-browser*="Trident/7.0"]{
+	.vertical-section{
+		.section-wrapper .container{
+			min-height: 100vh;
 		}
 	}
 }
@@ -572,13 +609,18 @@
 .has-parallax{
 	position: relative;
 	overflow: hidden;
+	background: none;
 
 	.image-holder{
 		position: absolute; 
 		left: 0px; 
 		top: 0px; 
 		width: 100%;
-		height: 100%;
+		height: 120%;
+
+		-webkit-background-size: cover;
+		background-size: cover;
+		background-position: center center;
 
 		img {
 			width: 100%;

@@ -36,6 +36,7 @@
 		margin-top: -132px;
 		width: 100%;
 
+
 		@include respond-to(small) {
 			font-size: 200px;
 			margin-top: -100px;
@@ -48,6 +49,7 @@
 		color: #000;
 		position: relative;
 		z-index: 1;
+		letter-spacing: 0.3em;
 	}
 }
 
@@ -328,5 +330,5 @@
 
 .blog-bottom-spacer{
 	height: 50px;
-	// background-color: #000;
+	background-color: #000;
 }

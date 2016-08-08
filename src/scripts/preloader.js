@@ -100,12 +100,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			}
 
 			for (var i = 0; i < vids.length; i++) {
-				var fileExitension = vids[i].split('.');
-				fileExitension = fileExitension[ fileExitension.length - 1 ];
-
-				if ( ['webm', 'mp4', 'ogv', 'ogg', 'mp3'].indexOf(fileExitension) < 0 ) {
-					imgs.push(vids[i]);
-				}
+				// imgs.push(vids[i]);
 			}
 		});
 
@@ -123,17 +118,24 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			var files = _preloadFiles[i].files;
 			if ( files.length ) {
 				for (var i = 0; i < files.length; i++) {
-					var fileExitension = files[i].split('.');
-					fileExitension = fileExitension[ fileExitension.length - 1 ];
-					if ( ['webm', 'mp4', 'ogv', 'ogg', 'mp3'].indexOf(fileExitension) < 0 ) {
-						imgs.push(files[i]);
-					}
+					// imgs.push(files[i]);		
 				}
 			}
 		}
 
 		for (var i = 0; i < imgs.length; i++) {
-			preload.loadFile(imgs[i]);
+			var fileExitension = imgs[i].split('.');
+				fileExitension = fileExitension[ fileExitension.length - 1 ];
+
+				if ( fileExitension.indexOf('?') > -1 ) {
+					fileExitension = fileExitension.split('?');
+					fileExitension = fileExitension[0];
+				}
+
+				if ( ['webm', 'mp4', 'ogv', 'ogg', 'mp3'].indexOf(fileExitension) < 0 
+				    && imgs[i].indexOf('vimeo.com') < 0 ) {
+					preload.loadFile(imgs[i]);
+				}
 		}
 	}
 

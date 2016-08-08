@@ -289,6 +289,22 @@
 				color: #fff;
 				font-size: 50px;
 				text-align: right;
+				line-height: 20px;
+
+				.text-signature{
+					@include SUWoodwardScript;
+					font-size: 39px;
+					line-height: 0.8em;
+			    display: inline-block;
+			    padding: 15px 10px 10px;
+					-webkit-transform: rotate(-2deg);
+					-o-transform: rotate(-2deg);
+					transform: rotate(-2deg);
+
+					@include respond-to(x-small) {
+						font-size: 29px;
+					}
+				}
 
 				i{
 					transform: rotate(-5deg);
@@ -346,13 +362,54 @@
 	}
 }
 
-&.no-flow{
+&.no-flow,
+&.menu-is-open{
+	overflow: hidden;
+
+	#wpadminbar {
+		opacity: 0;
+		pointer-events: none;
+		-webkit-transform: translateY(-100%);
+		-moz-transform: translateY(-100%);
+		-ms-transform: translateY(-100%);
+		-o-transform: translateY(-100%);
+		transform: translateY(-100%);
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		-ms-transition: all 0.3s;
+		-o-transition: all 0.3s;
+		transition: all 0.3s;
+	}
+
 	.content-wrapper{
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		overflow: auto;
+		overflow: hidden;
+		border-width: 0;
+
+		-webkit-transition: border-width 0.3s;
+		-moz-transition: border-width 0.3s;
+		-ms-transition: border-width 0.3s;
+		-o-transition: border-width 0.3s;
+		transition: border-width 0.3s;
+	}
+}
+
+
+
+.no-flexbox, .no-flexboxlegacy{
+	.overlay-menu{
+		.menu-wrapper{
+			display: table;
+			width: 100%;
+
+			.container{
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
 	}
 }

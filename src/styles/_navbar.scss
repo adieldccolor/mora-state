@@ -99,21 +99,28 @@
 
 
 
-/**
- * Note: I have omitted any vendor-prefixes for clarity.
- * Adding them is left as an exercise for the reader.
- */
 
+
+
+
+
+
+
+
+
+
+// Funcionality for headroom (scroll to hide/show navigation effect)
  .navigation--clone{
  	display: none;
  }
 
- .navigation--clone.headroom{
+ .headroom .navigation--clone{
  	display: block;
  }
 
-.navigation.headroom--pinned.headroom--not-top, 
-.navigation.headroom--unpinned {
+.headroom--pinned.headroom--not-top .navigation--clone, 
+.headroom--unpinned .navigation--clone {
+	background-color: #fff;
 	will-change: transform, background-color, height;
 	-webkit-transition: -webkit-transform 200ms linear, background-color 200ms linear, height 200ms linear;
 	-moz-transition: -moz-transform 200ms linear, background-color 200ms linear, height 200ms linear;
@@ -173,16 +180,50 @@
   }
 }
 
-.admin-bar .headroom--pinned.headroom--not-top, 
-.admin-bar .headroom--unpinned {
+.admin-bar.headroom--pinned.headroom--not-top .navigation--clone, 
+.admin-bar.headroom--unpinned .navigation--clone {
 	top: 32px;
 
 	@media screen and (max-width: 782px) {
 		top: 46px;
 	}
+
+	@media screen and (max-width: 600px) {
+		top: 0px;
+	}
 }
 
-.navigation.headroom--pinned.headroom--not-top {
+.admin-bar.headroom--pinned.headroom--not-top .navigation--clone,
+.admin-bar.headroom--unpinned .navigation--clone,
+.admin-bar .frame-border.frame-top {
+	top: 32px;
+
+	@media screen and (max-width: 782px) {
+		top: 46px;
+	}
+
+	@media screen and (max-width: 600px) {
+		top: 0px;
+	}
+}
+
+.admin-bar.headroom--pinned.headroom--not-top.menu-is-open .navigation--clone,
+.admin-bar.headroom--unpinned.menu-is-open .navigation--clone,
+.admin-bar.menu-is-open .frame-border.frame-top {
+	-webkit-transition: top 0.2s;
+	-moz-transition: top 0.2s;
+	-ms-transition: top 0.2s;
+	-o-transition: top 0.2s;
+	transition: top 0.2s;
+	top: 0;
+}
+
+
+.headroom--pinned.headroom--not-top .navigation--clone {
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
     transform: translateY(0%);
     background-color: #fff;
     height: 80px;
@@ -199,6 +240,34 @@
     	padding-top: 25px;
     }
 }
-.headroom--unpinned {
-    transform: translateY(-100%);
+
+
+.headroom--unpinned .navigation--clone {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.frame-border.frame-top{
+	-webkit-transition: -webkit-transform 0.2s;
+	-moz-transition: -moz-transform 0.2s;
+	-ms-transition: -ms-transform 0.2s;
+	-o-transition: -o-transform 0.2s;
+	transition: transform 0.2s;
+	
+	-webkit-transform: translateY(0%);
+	-moz-transform: translateY(0%);
+	-ms-transform: translateY(0%);
+	-o-transform: translateY(0%);
+	transform: translateY(0%);
+}
+
+.headroom--pinned.headroom--not-top .frame-border.frame-top{
+	-webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);	
 }

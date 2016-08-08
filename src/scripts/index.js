@@ -102,7 +102,7 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 		//on click everywheren but no .menu-box close it
 		.on('click', '.overlay-menu *', function(e) {
 
-			if(!$(event.target).parents().andSelf().is(".menu-box")){
+			if(!$(e.target).parents().andSelf().is(".menu-box")){
 	        $('body').removeClass(openClass);
 	    }
 
@@ -142,6 +142,10 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 
 		if ( minAspect && (minAspect + clutter) > newHeight ) {
 			newHeight = minAspect + clutter;
+		}
+
+		if ( newHeight > winHeight ) {
+			newHeight = winHeight + clutter;
 		}
 
 		if ( prop == 'height' || prop == "min-height" ) {
@@ -233,10 +237,17 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			var settings = [];
 			var poster = '';
 			var imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+			var isVimeo = false;
+			var ambientClass = "";
 
 			for (var i = 0; i < files.length; i++) {
 				var extension = files[i].split('.');
 				extension = extension[ extension.length - 1 ];
+
+				if ( extension.indexOf('?') > -1 ) {
+					extension = extension.split('?');
+					extension = extension[0];
+				}
 				
 				if ( extension == "mp4" ) {
 					settings.push({ type: 'video/mp4', src: files[i] });
@@ -246,6 +257,11 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 					settings.push({ type: 'video/ogg', src: files[i] });
 				}else if ( imageExtensions.indexOf(extension.toLowerCase()) > -1 ) {
 					poster = files[i];
+				} else if ( files[i].indexOf('vimeo.com') > -1 ) {
+					settings.push({ type: 'video/vimeo', src: files[i] });
+					isVimeo = true;
+					settings = `{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "${files[i]}"}], 
+					"vimeo": { "player_id": "full-video-bg_Vimeo_api" } }`;
 				}
 			}
 
@@ -256,8 +272,55 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 			                                     backgroundPosition: 'center center'
 			                                   });
 			} else {
-				BV = new $.BigVideo(); BV.init();
-			  BV.show(settings,{ambient:true});
+
+				if ( $('.no-video').length ) {
+					BV = new $.BigVideo(); BV.init();
+				  BV.show(poster);
+				} else {
+
+
+					if ( isVimeo ) {
+
+						ambientClass = "js-ambient";
+
+						var video = `<video id="full-video-bg" class="video-js vjs-tech ${ambientClass}" mute muted controls 
+							preload="auto" width="640" height="264" poster="${poster}" 
+							data-setup='${settings}'><p class="vjs-no-js">
+							To view this video please enable JavaScript, and consider upgrading to 
+							a web browser that<a href="http://videojs.com/html5-video-support/" 
+							target="_blank">supports HTML5 video</a></p></video>`;
+						
+						BV = new $.BigVideo(); BV.init();
+						var player = BV.getPlayer();
+						var $video = $(player.el_).find('video');
+						var vimeo_vid;
+
+						$video.after(video);
+						$video.remove();
+
+						window.BV_Vimeo = vimeo_vid;
+
+						videojs('full-video-bg', { muted: true }).ready(function(){
+							vimeo_vid = this;
+						  vimeo_vid.play();
+						  vimeo_vid.tech_.vimeo.api('setVolume', 0);
+							
+							window.BV_Vimeo = vimeo_vid;
+
+						});
+
+
+					} else {
+						BV = new $.BigVideo(); BV.init();
+					  BV.show(settings,{ambient:true});
+					}
+
+
+				}
+
+				
+				
+				window.BV = BV;
 			}
 		}
 	});
@@ -291,25 +354,48 @@ Author: Adiel Hercules | jadher.11x2@gmail.com | @adielhercules
 	morastate.navigationScrollAnimation = function() {
 		var $nav = $('.navigation').clone().addClass('navigation--clone');
 		$('.navigation').after($nav);
-		var headroom  = new Headroom($nav[0], { offset: 0 });
+		var headroom  = new Headroom($("body")[0], { offset: 0 });
 		// initialise
 		headroom.init();
 
 		$(window).on('scroll', function() {
 			if ( $(window).scrollTop() > 100 ) {
-				$('.navigation--clone').addClass('headroom');
+				$('body').addClass('headroom');
 			} else {
-				$('.navigation--clone').removeClass('headroom');
+				$('body').removeClass('headroom');
 			}
 		});
 	}
 
+
+	morastate.detectVHSupport = function() {
+		$('body').attr('data-browser', navigator.userAgent);
+
+		Modernizr.testStyles('#modernizr { width: 50vw; }', function(elem) {
+	    var width = parseInt(window.innerWidth / 2, 10);
+	    var compStyle = parseInt((window.getComputedStyle ?
+	                              getComputedStyle(elem, null) :
+	                              elem.currentStyle).width, 10);
+
+	    Modernizr.addTest('cssvwunit', compStyle == width);
+	  });
+
+	  Modernizr.testStyles('#modernizr { height: 50vh; }', function(elem) {
+	    var height = parseInt(window.innerHeight / 2, 10);
+	    var compStyle = parseInt((window.getComputedStyle ?
+	                              getComputedStyle(elem, null) :
+	                              elem.currentStyle).height, 10);
+	    Modernizr.addTest('cssvhunit', compStyle == height);
+	  });
+	}
 
 
 
 
 	//Start everything
 	morastate.ready = function() {
+		morastate.detectVHSupport();
+
 		morastate.enableResize();
 		morastate.enableMenu();
 		morastate.enableFullHeight();
